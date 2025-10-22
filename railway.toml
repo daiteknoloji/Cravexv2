@@ -5,7 +5,7 @@ builder = "DOCKERFILE"
 
 # Synapse Backend Service
 [[services]]
-name = "perfect-creation"
+name = "disciplined-emotion"
 dockerfile = "Dockerfile.synapse-prod"
 root = "."
 
@@ -15,7 +15,7 @@ SYNAPSE_REPORT_STATS = "no"
 
 # Element Web Frontend Service  
 [[services]]
-name = "tender-success"
+name = "bubbly-wonder"
 dockerfile = "www/element-web/Dockerfile"
 root = "www/element-web"
 

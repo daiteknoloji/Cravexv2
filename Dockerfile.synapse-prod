@@ -1,0 +1,19 @@
+FROM matrixdotorg/synapse:latest
+
+# Create data directory
+RUN mkdir -p /data
+
+# Copy configuration template
+COPY homeserver-postgres.yaml /data/homeserver.yaml
+
+# Generate signing key if not exists
+RUN if [ ! -f /data/signing.key ]; then \
+    python -m synapse.app.homeserver \
+    --config-path=/data/homeserver.yaml \
+    --generate-keys; \
+    fi
+
+EXPOSE 8008
+
+CMD ["/start.py"]
+

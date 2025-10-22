@@ -1,0 +1,43 @@
+# PostgreSQL Configuration for Production
+server_name: "your-domain.com"
+pid_file: /data/homeserver.pid
+
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    resources:
+      - names: [client, federation]
+        compress: false
+
+# PostgreSQL Database
+database:
+  name: psycopg2
+  args:
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    database: ${POSTGRES_DB}
+    host: ${POSTGRES_HOST}
+    port: ${POSTGRES_PORT}
+    cp_min: 5
+    cp_max: 10
+
+# Media Storage
+media_store_path: /data/media_store
+max_upload_size: 50M
+
+# Registration
+enable_registration: true
+enable_registration_without_verification: true
+
+# Security
+report_stats: false
+macaroon_secret_key: "CHANGE_ME_RANDOM_STRING"
+form_secret: "CHANGE_ME_RANDOM_STRING"
+signing_key_path: "/data/signing.key"
+
+# Federation
+trusted_key_servers:
+  - server_name: "matrix.org"
+

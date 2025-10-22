@@ -1,0 +1,26 @@
+# Railway Monorepo Configuration
+
+[build]
+builder = "DOCKERFILE"
+
+# Synapse Backend Service
+[[services]]
+name = "synapse"
+dockerfile = "Dockerfile.synapse-prod"
+
+[services.variables]
+SYNAPSE_SERVER_NAME = "${{ RAILWAY_PUBLIC_DOMAIN }}"
+SYNAPSE_REPORT_STATS = "no"
+
+# Element Web Frontend Service  
+[[services]]
+name = "element-web"
+dockerfile = "www/element-web/Dockerfile"
+root = "www/element-web"
+
+# Admin Panel Service
+[[services]]
+name = "admin"
+dockerfile = "www/admin/Dockerfile"
+root = "www/admin"
+

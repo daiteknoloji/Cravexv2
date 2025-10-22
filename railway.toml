@@ -24,4 +24,3 @@ root = "www/element-web"
 name = "admin"
 dockerfile = "www/admin/Dockerfile"
 root = "www/admin"
-

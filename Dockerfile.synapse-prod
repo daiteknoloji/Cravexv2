@@ -4,7 +4,7 @@ FROM matrixdotorg/synapse:latest
 RUN mkdir -p /data
 
 # Copy configuration template
-COPY homeserver-postgres.yaml /data/homeserver.yaml
+COPY homeserver-sqlite.yaml /data/homeserver.yaml
 
 # Generate signing key if not exists
 RUN if [ ! -f /data/signing.key ]; then \

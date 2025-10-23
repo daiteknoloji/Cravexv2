@@ -1,0 +1,51 @@
+# SQLite Configuration for Railway
+server_name: "disciplined-emotion-production.up.railway.app"
+pid_file: /data/homeserver.pid
+
+listeners:
+  - port: 8008
+    tls: false
+    type: http
+    x_forwarded: true
+    bind_addresses: ['0.0.0.0']
+    resources:
+      - names: [client, federation]
+        compress: false
+    
+    # CORS for Element Web
+    additional_resources:
+      "/_matrix/client":
+        - names: [client]
+          compress: true
+
+# Web Client (Element) Settings
+web_client_location: https://bubbly-wonder-production.up.railway.app
+
+# CORS Settings
+cors_origins:
+  - https://bubbly-wonder-production.up.railway.app
+  - https://cravexv2-production.up.railway.app
+
+# SQLite Database (Railway için daha basit)
+database:
+  name: sqlite3
+  args:
+    database: /data/homeserver.db
+
+# Media Storage
+media_store_path: /data/media_store
+max_upload_size: 50M
+
+# Registration
+enable_registration: true
+enable_registration_without_verification: true
+
+# Security
+report_stats: false
+macaroon_secret_key: "CHANGE_ME_RANDOM_STRING"
+form_secret: "CHANGE_ME_RANDOM_STRING"
+signing_key_path: "/data/signing.key"
+
+# Federation
+trusted_key_servers:
+  - server_name: "matrix.org"

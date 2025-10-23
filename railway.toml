@@ -19,6 +19,10 @@ name = "bubbly-wonder"
 dockerfile = "www/element-web/Dockerfile"
 root = "www/element-web"
 
+[services.variables]
+PORT = "80"
+SYNAPSE_URL = "https://disciplined-emotion-production.up.railway.app"
+
 # Admin Panel Service
 [[services]]
 name = "cravexv2"

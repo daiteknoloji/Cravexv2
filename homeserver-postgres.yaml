@@ -1,5 +1,5 @@
 # PostgreSQL Configuration for Production
-server_name: "your-domain.com"
+server_name: "disciplined-emotion-production.up.railway.app"
 pid_file: /data/homeserver.pid
 
 listeners:
@@ -7,9 +7,24 @@ listeners:
     tls: false
     type: http
     x_forwarded: true
+    bind_addresses: ['0.0.0.0']
     resources:
       - names: [client, federation]
         compress: false
+    
+    # CORS for Element Web
+    additional_resources:
+      "/_matrix/client":
+        - names: [client]
+          compress: true
+
+# Web Client (Element) Settings
+web_client_location: https://bubbly-wonder-production.up.railway.app
+
+# CORS Settings
+cors_origins:
+  - https://bubbly-wonder-production.up.railway.app
+  - https://cravexv2-production.up.railway.app
 
 # PostgreSQL Database
 database:

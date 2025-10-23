@@ -11,3 +11,7 @@ EXPOSE 8008
 # Start Synapse
 CMD ["/start.py"]
 
+
+
+
+

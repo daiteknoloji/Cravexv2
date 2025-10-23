@@ -204,3 +204,7 @@ GitHub: [daiteknoloji/Cravexv2](https://github.com/daiteknoloji/Cravexv2)
 
 ⭐ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın!
 
+
+
+
+

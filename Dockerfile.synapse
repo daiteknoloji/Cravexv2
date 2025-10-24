@@ -1,8 +1,11 @@
 FROM matrixdotorg/synapse:latest
 
-# Copy configuration
+# Copy configuration files
 COPY homeserver-postgres.yaml /data/homeserver.yaml
 COPY synapse-data/localhost.log.config /data/localhost.log.config
+
+# Create necessary directories
+RUN mkdir -p /tmp/media_store
 
 # Expose port
 EXPOSE 8008

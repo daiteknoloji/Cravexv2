@@ -3,26 +3,26 @@
 # Synapse Backend Service
 [[services]]
 name = "disciplined-emotion"
-source = "."
 
 [services.build]
-builder = "DOCKERFILE"
+builder = "dockerfile"
 dockerfilePath = "Dockerfile.synapse-prod"
+watchPatterns = ["**"]
 
 # Element Web Frontend Service  
 [[services]]
 name = "bubbly-wonder"
-source = "www/element-web"
 
 [services.build]
-builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile"
+builder = "dockerfile"
+dockerfilePath = "www/element-web/Dockerfile"
+watchPatterns = ["www/element-web/**"]
 
 # Admin Panel Service
 [[services]]
 name = "cravexv2"
-source = "www/admin"
 
 [services.build]
-builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile"
+builder = "dockerfile"
+dockerfilePath = "www/admin/Dockerfile"
+watchPatterns = ["www/admin/**"]

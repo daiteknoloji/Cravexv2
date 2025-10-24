@@ -128,5 +128,12 @@
       </a>
     </footer>
   </body>
-  <script>document.getElementById("version").textContent = __SYNAPSE_ADMIN_VERSION__</script>
+  <script>
+    // Version display - fallback if vite plugin is disabled
+    try {
+      document.getElementById("version").textContent = typeof __SYNAPSE_ADMIN_VERSION__ !== 'undefined' ? __SYNAPSE_ADMIN_VERSION__ : '0.10.3';
+    } catch (e) {
+      document.getElementById("version").textContent = '0.10.3';
+    }
+  </script>
 </html>

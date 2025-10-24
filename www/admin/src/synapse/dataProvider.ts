@@ -476,16 +476,19 @@ const resourceMap = {
     }),
   },
   chat_history: {
-    // Custom endpoint - we'll fetch all room messages from all rooms
-    path: "/_synapse/admin/v1/rooms",
+    // Note: This uses the rooms endpoint as Synapse doesn't have a direct "all messages" API
+    // We'll need to implement custom logic to fetch messages from each room
+    path: "/_synapse/admin/v1/event_reports",
     map: (event: any) => ({
       ...event,
-      id: event.event_id || `${event.room_id}_${event.origin_server_ts}`,
-      timestamp: event.origin_server_ts,
-      body: event.content?.body || "",
-      msgtype: event.content?.msgtype || event.type,
+      id: event.event_id || event.id || Math.random().toString(),
+      timestamp: event.received_ts || event.event_ts || Date.now(),
+      sender: event.sender || event.user_id || "unknown",
+      body: event.reason || event.content?.body || event.name || "",
+      msgtype: "report",
+      room_id: event.room_id || "",
     }),
-    data: "rooms", // Will be overridden in custom getList
+    data: "event_reports",
     total: (json: any) => json.total || 0,
   },
 };

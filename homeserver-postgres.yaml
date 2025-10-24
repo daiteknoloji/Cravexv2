@@ -29,6 +29,7 @@ cors_origins:
 # PostgreSQL Database
 database:
   name: psycopg2
+  allow_unsafe_locale: true
   args:
     user: neondb_owner
     password: npg_p5kvxZrC4tOd

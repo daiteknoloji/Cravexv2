@@ -7,24 +7,13 @@ builder = "DOCKERFILE"
 [[services]]
 name = "disciplined-emotion"
 dockerfile = "Dockerfile.synapse-prod"
-root = "."
-
-[services.variables]
-SYNAPSE_SERVER_NAME = "${{ RAILWAY_PUBLIC_DOMAIN }}"
-SYNAPSE_REPORT_STATS = "no"
 
 # Element Web Frontend Service  
 [[services]]
 name = "bubbly-wonder"
 dockerfile = "www/element-web/Dockerfile"
-root = "www/element-web"
-
-[services.variables]
-PORT = "80"
-SYNAPSE_URL = "https://disciplined-emotion-production.up.railway.app"
 
 # Admin Panel Service
 [[services]]
 name = "cravexv2"
 dockerfile = "www/admin/Dockerfile"
-root = "www/admin"

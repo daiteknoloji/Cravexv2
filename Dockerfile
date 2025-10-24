@@ -1,18 +1,8 @@
 # Simplified Synapse Dockerfile for Railway
 FROM matrixdotorg/synapse:latest
 
-# Create data directory
-RUN mkdir -p /data
-
-# Copy PostgreSQL configuration
+# Copy PostgreSQL configuration to config directory
 COPY homeserver-postgres.yaml /data/homeserver.yaml
-
-# Generate signing key if not exists
-RUN if [ ! -f /data/signing.key ]; then \
-    python -m synapse.app.homeserver \
-    --config-path=/data/homeserver.yaml \
-    --generate-keys; \
-    fi
 
 # Expose Synapse port
 EXPOSE 8008
@@ -21,6 +11,6 @@ EXPOSE 8008
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s \
   CMD curl -f http://localhost:8008/health || exit 1
 
-# Start Synapse
+# Start Synapse (will auto-generate signing key on first run)
 CMD ["/start.py"]
 

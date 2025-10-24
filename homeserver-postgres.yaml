@@ -48,9 +48,9 @@ enable_registration_without_verification: true
 
 # Security
 report_stats: false
-macaroon_secret_key: "CHANGE_ME_RANDOM_STRING"
-form_secret: "CHANGE_ME_RANDOM_STRING"
-signing_key_path: "/data/signing.key"
+macaroon_secret_key: "${MACAROON_SECRET_KEY}"
+form_secret: "${FORM_SECRET}"
+signing_key_path: "/data/homeserver.signing.key"
 
 # Federation
 trusted_key_servers:

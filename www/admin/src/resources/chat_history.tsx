@@ -37,18 +37,13 @@ export const ChatHistoryList = () => (
     perPage={50}
   >
     <Datagrid bulkActionButtons={false} rowClick={false}>
-      <ReferenceField source="sender" reference="users" label="User" link="show">
-        <TextField source="displayname" />
-      </ReferenceField>
       <TextField source="sender" label="User ID" />
-      <ReferenceField source="room_id" reference="rooms" label="Room" link="show">
-        <TextField source="name" />
-      </ReferenceField>
+      <TextField source="room_id" label="Room ID" />
       <FunctionField
         label="Message"
         render={(record: any) => {
           if (record?.body) {
-            const maxLen = 150;
+            const maxLen = 200;
             return record.body.length > maxLen 
               ? record.body.substring(0, maxLen) + "..." 
               : record.body;
@@ -58,7 +53,7 @@ export const ChatHistoryList = () => (
           }
           return "-";
         }}
-        sx={{ maxWidth: "400px" }}
+        sx={{ maxWidth: "500px", wordBreak: "break-word" }}
       />
       <TextField source="msgtype" label="Type" />
       <DateField 

@@ -4,7 +4,7 @@
   publish = "webapp"
 
 [build.environment]
-  NODE_VERSION = "20"
+  NODE_VERSION = "22"
   HOMESERVER_URL = "https://cravexv3-production.up.railway.app"
   HOMESERVER_NAME = "cravexv3-production.up.railway.app"
   

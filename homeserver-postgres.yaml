@@ -11,12 +11,6 @@ listeners:
     resources:
       - names: [client, federation]
         compress: false
-    
-    # CORS for Element Web
-    additional_resources:
-      "/_matrix/client":
-        - names: [client]
-          compress: true
 
 # Web Client (Element) Settings
 web_client_location: https://bubbly-wonder-production.up.railway.app

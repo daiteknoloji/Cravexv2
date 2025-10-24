@@ -1,6 +1,6 @@
 # PostgreSQL Configuration for Production
-server_name: "disciplined-emotion-production.up.railway.app"
-pid_file: /data/homeserver.pid
+server_name: "cravexv3-production.up.railway.app"
+pid_file: /tmp/homeserver.pid
 
 listeners:
   - port: 8008
@@ -30,11 +30,11 @@ cors_origins:
 database:
   name: psycopg2
   args:
-    user: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
-    database: ${POSTGRES_DB}
-    host: ${POSTGRES_HOST}
-    port: ${POSTGRES_PORT}
+    user: neondb_owner
+    password: npg_p5kvxZrC4tOd
+    database: Cravex
+    host: ep-odd-sunset-aggu808m-pooler.c-2.eu-central-1.aws.neon.tech
+    port: 5432
     cp_min: 5
     cp_max: 10
 
@@ -48,11 +48,12 @@ enable_registration_without_verification: true
 
 # Security
 report_stats: false
-macaroon_secret_key: "${MACAROON_SECRET_KEY}"
-form_secret: "${FORM_SECRET}"
+macaroon_secret_key: "OrCuXgz6PywSjZ8DHoEhpLcKfbxd0vRe"
+form_secret: "pt8WNakVYwqM7e3n2PCuvOJb9i5z4DQG"
 signing_key_path: "/tmp/homeserver.signing.key"
 
 # Federation
+suppress_key_server_warning: true
 trusted_key_servers:
   - server_name: "matrix.org"
 

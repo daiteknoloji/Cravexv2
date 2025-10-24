@@ -7,10 +7,5 @@ COPY homeserver-postgres.yaml /data/homeserver.yaml
 # Expose Synapse port
 EXPOSE 8008
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=5s --start-period=60s \
-  CMD curl -f http://localhost:8008/health || exit 1
-
-# Use ENTRYPOINT instead of CMD to prevent Railway override
-ENTRYPOINT ["/start.py"]
+# Synapse image already has correct ENTRYPOINT/CMD, no need to override
 

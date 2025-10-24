@@ -79,9 +79,11 @@ app.get('/api/messages', async (req, res) => {
     const messages = result.rows.map(row => {
       let content = {};
       try {
-        content = JSON.parse(row.content_raw);
+        if (row.content_raw) {
+          content = JSON.parse(row.content_raw);
+        }
       } catch (e) {
-        content = { body: row.content_raw };
+        content = { body: String(row.content_raw || '') };
       }
 
       return {
@@ -89,10 +91,10 @@ app.get('/api/messages', async (req, res) => {
         event_id: row.id,
         room_id: row.room_id,
         sender: row.sender,
-        timestamp: parseInt(row.timestamp),
+        timestamp: parseInt(row.timestamp) || Date.now(),
         type: row.type,
-        body: content.body || '',
-        msgtype: content.msgtype || 'm.text'
+        body: (content && content.body) || '',
+        msgtype: (content && content.msgtype) || 'm.text'
       };
     });
 

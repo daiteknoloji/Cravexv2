@@ -1,25 +1,17 @@
-# Railway Monorepo Configuration
+# Railway Configuration - Synapse Only
+# Element Web and Admin Panel are deployed on Netlify
 
-# Synapse Backend Service
 [[services]]
-name = "disciplined-emotion"
+name = "synapse"
 
 [services.build]
 builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile.synapse-prod"
+dockerfilePath = "Dockerfile"
 
-# Element Web Frontend Service  
-[[services]]
-name = "bubbly-wonder"
-
-[services.build]
-builder = "DOCKERFILE"
-dockerfilePath = "www/element-web/Dockerfile"
-
-# Admin Panel Service
-[[services]]
-name = "cravexv2"
-
-[services.build]
-builder = "DOCKERFILE"
-dockerfilePath = "www/admin/Dockerfile"
+[services.deploy]
+numReplicas = 1
+restartPolicyType = "ON_FAILURE"
+restartPolicyMaxRetries = 10
+healthcheckPath = "/health"
+healthcheckTimeout = 5
+startCommand = "/start.py"

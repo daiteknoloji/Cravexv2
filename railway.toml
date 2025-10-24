@@ -7,13 +7,19 @@ builder = "DOCKERFILE"
 [[services]]
 name = "disciplined-emotion"
 dockerfile = "Dockerfile.synapse-prod"
+dockerfilePath = "Dockerfile.synapse-prod"
+root = "."
 
 # Element Web Frontend Service  
 [[services]]
 name = "bubbly-wonder"
-dockerfile = "www/element-web/Dockerfile"
+dockerfile = "Dockerfile"
+dockerfilePath = "Dockerfile"
+root = "www/element-web"
 
 # Admin Panel Service
 [[services]]
 name = "cravexv2"
-dockerfile = "www/admin/Dockerfile"
+dockerfile = "Dockerfile"
+dockerfilePath = "Dockerfile"
+root = "www/admin"

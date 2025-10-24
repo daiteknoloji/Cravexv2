@@ -509,6 +509,26 @@ function getSearchOrder(order: "ASC" | "DESC") {
 const dataProvider: SynapseDataProvider = {
   getList: async (resource, params) => {
     console.log("getList " + resource);
+    
+    // Special handling for chat_history - uses external API
+    if (resource === "chat_history") {
+      const { page, perPage } = params.pagination as PaginationPayload;
+      const from = (page - 1) * perPage;
+      const chatApiUrl = import.meta.env.VITE_CHAT_HISTORY_API || "http://localhost:8009/api/messages";
+      const query = {
+        from: from,
+        limit: perPage,
+        room_id: params.filter.room_id,
+        sender: params.filter.sender,
+      };
+      const url = `${chatApiUrl}?${stringify(query)}`;
+      const { json } = await jsonClient(url);
+      return {
+        data: json.data || [],
+        total: json.total || 0,
+      };
+    }
+    
     const { user_id, name, guests, deactivated, locked, search_term, destination, valid } = params.filter;
     const { page, perPage } = params.pagination as PaginationPayload;
     const { field, order } = params.sort as SortPayload;

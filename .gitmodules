@@ -1,9 +1,7 @@
-[submodule "www/element-web"]
-	path = www/element-web
-	url = https://github.com/element-hq/element-web.git
-	branch = develop
 [submodule "www/admin"]
 	path = www/admin
 	url = https://github.com/Awesome-Technologies/synapse-admin.git
 	branch = master
+
+
 

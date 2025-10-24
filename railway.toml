@@ -1,25 +1,28 @@
 # Railway Monorepo Configuration
 
-[build]
-builder = "DOCKERFILE"
-
 # Synapse Backend Service
 [[services]]
 name = "disciplined-emotion"
-dockerfile = "Dockerfile.synapse-prod"
+source = "."
+
+[services.build]
+builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile.synapse-prod"
-root = "."
 
 # Element Web Frontend Service  
 [[services]]
 name = "bubbly-wonder"
-dockerfile = "Dockerfile"
+source = "www/element-web"
+
+[services.build]
+builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
-root = "www/element-web"
 
 # Admin Panel Service
 [[services]]
 name = "cravexv2"
-dockerfile = "Dockerfile"
+source = "www/admin"
+
+[services.build]
+builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile"
-root = "www/admin"

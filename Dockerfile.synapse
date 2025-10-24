@@ -1,8 +1,7 @@
 FROM matrixdotorg/synapse:latest
 
 # Copy configuration
-COPY synapse-data/homeserver.yaml /data/homeserver.yaml
-COPY synapse-data/localhost.signing.key /data/localhost.signing.key
+COPY homeserver-postgres.yaml /data/homeserver.yaml
 COPY synapse-data/localhost.log.config /data/localhost.log.config
 
 # Expose port

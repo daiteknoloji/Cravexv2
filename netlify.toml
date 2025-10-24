@@ -1,6 +1,6 @@
 [build]
   base = "www/element-web"
-  command = "chmod +x ../../element-web-build.sh && ../../element-web-build.sh"
+  command = "yarn install --network-timeout 100000 && chmod +x ../../element-web-build.sh && ../../element-web-build.sh"
   publish = "webapp"
 
 [build.environment]

@@ -12,3 +12,5 @@ dockerfilePath = "Dockerfile.synapse"
 numReplicas = 1
 restartPolicyType = "ON_FAILURE"
 restartPolicyMaxRetries = 10
+healthcheckPath = "/health"
+healthcheckTimeout = 300

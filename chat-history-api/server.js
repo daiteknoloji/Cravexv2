@@ -34,6 +34,7 @@ app.get('/api/messages', async (req, res) => {
         e.content::text as content_raw
       FROM events e
       WHERE e.type = 'm.room.message'
+        AND e.content IS NOT NULL
     `;
 
     const queryParams = [];
@@ -78,12 +79,19 @@ app.get('/api/messages', async (req, res) => {
     // Parse content JSON
     const messages = result.rows.map(row => {
       let content = {};
+      let body = '';
+      let msgtype = 'm.text';
+      
       try {
         if (row.content_raw) {
           content = JSON.parse(row.content_raw);
+          body = content.body || '';
+          msgtype = content.msgtype || 'm.text';
+          console.log('Parsed content:', { body, msgtype, sender: row.sender });
         }
       } catch (e) {
-        content = { body: String(row.content_raw || '') };
+        console.log('Failed to parse content:', row.content_raw, e.message);
+        body = String(row.content_raw || '');
       }
 
       return {
@@ -93,8 +101,8 @@ app.get('/api/messages', async (req, res) => {
         sender: row.sender,
         timestamp: parseInt(row.timestamp) || Date.now(),
         type: row.type,
-        body: (content && content.body) || '',
-        msgtype: (content && content.msgtype) || 'm.text'
+        body: body,
+        msgtype: msgtype
       };
     });
 

@@ -414,7 +414,10 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
             return;
         }
 
-        if (crossSigningIsSetUp) {
+        // Cravex: Skip all verification flows if disabled in config
+        if (SdkConfig.get("disable_device_verification")) {
+            this.onLoggedIn();
+        } else if (crossSigningIsSetUp) {
             // if the user has previously set up cross-signing, verify this device so we can fetch the
             // private keys.
 
@@ -1362,6 +1365,8 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
      * @returns true if the user must verify
      */
     private async shouldForceVerification(): Promise<boolean> {
+        // Cravex: Never force verification if disabled in config
+        if (SdkConfig.get("disable_device_verification")) return false;
         if (!SdkConfig.get("force_verification")) return false;
         const mustVerifyFlag = localStorage.getItem("must_verify_device");
         if (!mustVerifyFlag) return false;
@@ -1723,14 +1728,17 @@ export default class MatrixChat extends React.PureComponent<IProps, IState> {
     private async onClientStarted(): Promise<void> {
         const cli = MatrixClientPeg.safeGet();
 
-        const shouldForceVerification = await this.shouldForceVerification();
-        // XXX: Don't replace the screen if it's already one of these: postLoginSetup
-        // changes to these screens in certain circumstances so we shouldn't clobber it.
-        // We should probably have one place where we decide what the next screen is after
-        // login.
-        if (![Views.COMPLETE_SECURITY, Views.E2E_SETUP].includes(this.state.view)) {
-            if (shouldForceVerification) {
-                this.setStateForNewView({ view: Views.COMPLETE_SECURITY });
+        // Cravex: Skip verification check if disabled
+        if (!SdkConfig.get("disable_device_verification")) {
+            const shouldForceVerification = await this.shouldForceVerification();
+            // XXX: Don't replace the screen if it's already one of these: postLoginSetup
+            // changes to these screens in certain circumstances so we shouldn't clobber it.
+            // We should probably have one place where we decide what the next screen is after
+            // login.
+            if (![Views.COMPLETE_SECURITY, Views.E2E_SETUP].includes(this.state.view)) {
+                if (shouldForceVerification) {
+                    this.setStateForNewView({ view: Views.COMPLETE_SECURITY });
+                }
             }
         }
 

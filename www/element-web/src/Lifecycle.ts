@@ -880,7 +880,8 @@ async function doSetLoggedIn(
     // Run the migrations after the MatrixClientPeg has been assigned
     SettingsStore.runMigrations(isFreshLogin);
 
-    if (isFreshLogin && !credentials.guest) {
+    // Cravex: Don't set must_verify_device flag if verification is disabled
+    if (isFreshLogin && !credentials.guest && !SdkConfig.get("disable_device_verification")) {
         // For newly registered users, set a flag so that we force them to verify,
         // (we don't want to force users with existing sessions to verify though)
         localStorage.setItem("must_verify_device", "true");

@@ -1,10 +1,11 @@
 [build]
   base = "www/admin"
-  command = "yarn install && yarn build"
+  command = "chmod +x ../../admin-build.sh && ../../admin-build.sh"
   publish = "dist"
 
 [build.environment]
   NODE_VERSION = "20"
+  HOMESERVER_URL = "https://cravexv3-production.up.railway.app"
   
 [[redirects]]
   from = "/*"
@@ -17,6 +18,7 @@
     X-Frame-Options = "SAMEORIGIN"
     X-Content-Type-Options = "nosniff"
     X-XSS-Protection = "1; mode=block"
+
 
 
 

@@ -1,10 +1,12 @@
 [build]
   base = "www/element-web"
-  command = "yarn install && yarn build"
+  command = "chmod +x ../../element-web-build.sh && ../../element-web-build.sh"
   publish = "webapp"
 
 [build.environment]
   NODE_VERSION = "20"
+  HOMESERVER_URL = "https://cravexv3-production.up.railway.app"
+  HOMESERVER_NAME = "cravexv3-production.up.railway.app"
   
 [[redirects]]
   from = "/*"
@@ -29,6 +31,7 @@
   for = "/index.html"
   [headers.values]
     Cache-Control = "no-cache"
+
 
 
 

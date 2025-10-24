@@ -6,7 +6,7 @@ name = "synapse"
 
 [services.build]
 builder = "DOCKERFILE"
-dockerfilePath = "Dockerfile"
+dockerfilePath = "Dockerfile.synapse"
 
 [services.deploy]
 numReplicas = 1

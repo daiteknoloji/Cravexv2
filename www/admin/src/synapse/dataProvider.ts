@@ -476,19 +476,14 @@ const resourceMap = {
     }),
   },
   chat_history: {
-    // Note: This uses the rooms endpoint as Synapse doesn't have a direct "all messages" API
-    // We'll need to implement custom logic to fetch messages from each room
-    path: "/_synapse/admin/v1/event_reports",
+    // Custom chat history API - fetches messages directly from PostgreSQL
+    // Deploy this as a separate service on Railway
+    path: process.env.REACT_APP_CHAT_HISTORY_API || "http://localhost:8009/api/messages",
     map: (event: any) => ({
       ...event,
-      id: event.event_id || event.id || Math.random().toString(),
-      timestamp: event.received_ts || event.event_ts || Date.now(),
-      sender: event.sender || event.user_id || "unknown",
-      body: event.reason || event.content?.body || event.name || "",
-      msgtype: "report",
-      room_id: event.room_id || "",
+      id: event.id || event.event_id,
     }),
-    data: "event_reports",
+    data: "data",
     total: (json: any) => json.total || 0,
   },
 };

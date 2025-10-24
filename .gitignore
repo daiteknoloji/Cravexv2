@@ -12,9 +12,6 @@ webapp/
 # Synapse data
 synapse-data/
 
-# Admin panel (not needed for Netlify Element Web deployment)
-www/admin/
-
 # Environment files
 .env
 .env.local

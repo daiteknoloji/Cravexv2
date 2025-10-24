@@ -38,8 +38,8 @@ database:
     cp_min: 5
     cp_max: 10
 
-# Media Storage
-media_store_path: /data/media_store
+# Media Storage (using /tmp for Railway compatibility)
+media_store_path: /tmp/media_store
 max_upload_size: 50M
 
 # Registration

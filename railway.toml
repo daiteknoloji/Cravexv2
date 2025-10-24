@@ -5,24 +5,21 @@
 name = "disciplined-emotion"
 
 [services.build]
-builder = "dockerfile"
+builder = "DOCKERFILE"
 dockerfilePath = "Dockerfile.synapse-prod"
-watchPatterns = ["**"]
 
 # Element Web Frontend Service  
 [[services]]
 name = "bubbly-wonder"
 
 [services.build]
-builder = "dockerfile"
+builder = "DOCKERFILE"
 dockerfilePath = "www/element-web/Dockerfile"
-watchPatterns = ["www/element-web/**"]
 
 # Admin Panel Service
 [[services]]
 name = "cravexv2"
 
 [services.build]
-builder = "dockerfile"
+builder = "DOCKERFILE"
 dockerfilePath = "www/admin/Dockerfile"
-watchPatterns = ["www/admin/**"]

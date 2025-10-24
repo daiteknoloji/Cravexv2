@@ -25,6 +25,7 @@ import { Action } from "../dispatcher/actions";
 import { UserTab } from "../components/views/dialogs/UserTab";
 import defaultDispatcher from "../dispatcher/dispatcher";
 import ConfirmKeyStorageOffDialog from "../components/views/dialogs/ConfirmKeyStorageOffDialog";
+import SdkConfig from "../SdkConfig";
 
 const TOAST_KEY = "setupencryption";
 
@@ -143,6 +144,11 @@ export enum Kind {
  * @param kind The kind of toast to show
  */
 export const showToast = (kind: Kind): void => {
+    // Cravex: Disable all verification and encryption setup toasts
+    if (SdkConfig.get("disable_device_verification")) {
+        return;
+    }
+    
     if (
         ModuleRunner.instance.extensions.cryptoSetup.setupEncryptionNeeded({
             kind: kind as any,

@@ -478,7 +478,7 @@ const resourceMap = {
   chat_history: {
     // Custom chat history API - fetches messages directly from PostgreSQL
     // Deploy this as a separate service on Railway
-    path: process.env.REACT_APP_CHAT_HISTORY_API || "http://localhost:8009/api/messages",
+    path: import.meta.env.VITE_CHAT_HISTORY_API || "http://localhost:8009/api/messages",
     map: (event: any) => ({
       ...event,
       id: event.id || event.event_id,

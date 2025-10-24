@@ -50,7 +50,7 @@ enable_registration_without_verification: true
 report_stats: false
 macaroon_secret_key: "${MACAROON_SECRET_KEY}"
 form_secret: "${FORM_SECRET}"
-signing_key_path: "/data/homeserver.signing.key"
+signing_key_path: "/tmp/homeserver.signing.key"
 
 # Federation
 trusted_key_servers:
